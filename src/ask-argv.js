@@ -1,5 +1,5 @@
-import {paramCase, sentenceCase} from 'change-case';
 import process from 'node:process';
+import {paramCase, sentenceCase} from 'change-case';
 import yargs from 'yargs';
 import {hideBin} from 'yargs/helpers';
 import {config as configDotEnv} from 'dotenv';
@@ -61,10 +61,3 @@ function makeBuild(config) {
 		return command;
 	};
 }
-
-console.log(
-	await askArgv({
-		positional: [{type: 'string', name: 'user-name'}],
-		password: {type: 'list', options: ['a', 'b', 'c']},
-	}),
-);
