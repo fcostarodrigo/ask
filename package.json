@@ -1,0 +1,66 @@
+{
+  "name": "ask",
+  "version": "1.0.0",
+  "description": "Wrapper of yargs and enquirer to ask user for input.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "c8 ava",
+    "lint": "xo src",
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcostarodrigo/ask.git"
+  },
+  "keywords": [
+    "cli",
+    "args",
+    "parser"
+  ],
+  "author": "Rodrigo Fernandes da Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fcostarodrigo/ask/issues"
+  },
+  "homepage": "https://github.com/fcostarodrigo/ask#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.18",
+    "@types/yargs": "^17.0.8",
+    "ava": "^4.0.1",
+    "c8": "^7.11.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.5.1",
+    "webpack": "^5.69.0",
+    "xo": "^0.48.0"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "dotenv": "^16.0.0",
+    "enquirer": "^2.3.6",
+    "yargs": "^17.3.1"
+  },
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "node/file-extension-in-import": "off",
+      "unicorn/better-regex": "off",
+      "no-await-in-loop": "off",
+      "no-useless-escape": "off",
+      "unicorn/no-await-expression-member": "off"
+    }
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --no-error-on-unmatched-pattern --ignore-unknown --write"
+    ],
+    "*.{js,jsx,mjs}": [
+      "xo src --fix"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "all"
+  }
+}
