@@ -1,6 +1,6 @@
 {
   "name": "ask",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Wrapper of yargs and enquirer to ask user for input.",
   "main": "src/index.js",
   "type": "module",
@@ -61,6 +61,7 @@
     ]
   },
   "prettier": {
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "printWidth": 100
   }
 }

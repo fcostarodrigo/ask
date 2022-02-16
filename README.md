@@ -70,25 +70,29 @@ node src/test.js user xxx
 You can use in the middle of your program to get additional information.
 
 ```js
-import { ask } from "ask-missing";
+import { ask } from "@fcostarodrigo/ask";
 
-const password = await ask({ type: "password" });
+const password = await ask({ name: "password", type: "password" });
 ```
 
 You can specify a list of options.
 
 ```js
-import { ask } from "ask-missing";
+import { ask } from "@fcostarodrigo/ask";
 
 const letter = await ask({ type: "string", options: ["a", "b", "c"] });
 ```
+
+### Overrides
+
+You can pass `yargsOverrides` or `enquirerOverrides` to override any configuration.
 
 ### Type mapping
 
 | Type     | options | yargs                                         | enquirer                                                                    |
 | -------- | ------- | --------------------------------------------- | --------------------------------------------------------------------------- |
 | list     | no      | [array](https://yargs.js.org/docs/#array)     | [list](https://www.npmjs.com/package/enquirer#list-prompt)                  |
-| list     | yes     | [array](https://yargs.js.org/docs/#array)     | [multi select](https://www.npmjs.com/package/enquirer#multiselect-prompt)   |
+| list     | yes     | [array](https://yargs.js.org/docs/#array)     | [auto complete](https://www.npmjs.com/package/enquirer#autocomplete-prompt) |
 | boolean  |         | [boolean](https://yargs.js.org/docs/#boolean) | [confirm](https://www.npmjs.com/package/enquirer#confirm-prompt)            |
 | number   |         | [number](https://yargs.js.org/docs/#number)   | [numeral](https://www.npmjs.com/package/enquirer#numeral-prompt)            |
 | string   | no      | [string](https://yargs.js.org/docs/#string)   | [input](https://www.npmjs.com/package/enquirer#input-prompt)                |
