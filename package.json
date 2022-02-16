@@ -1,9 +1,12 @@
 {
-  "name": "ask",
+  "name": "@fcostarodrigo/ask",
   "version": "0.0.1",
   "description": "Wrapper of yargs and enquirer to ask user for input.",
   "main": "src/index.js",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "c8 ava",
     "lint": "xo src",
