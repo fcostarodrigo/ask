@@ -87,6 +87,10 @@ const letter = await ask({ type: "string", options: ["a", "b", "c"] });
 
 You can pass `yargsOverrides` or `enquirerOverrides` to override any configuration.
 
+### Default value.
+
+Set the default value passing the `defaultValue` option.
+
 ### Type mapping
 
 | Type     | options | yargs                                         | enquirer                                                                    |

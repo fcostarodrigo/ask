@@ -14,6 +14,7 @@ export async function ask(option) {
 		name: option.name,
 		message: sentenceCase(option.name),
 		choices: option.options,
+		initial: option.defaultValue,
 		...typeMap[option.type](option),
 		...option.enquirerOverrides,
 	});

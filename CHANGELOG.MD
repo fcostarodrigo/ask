@@ -1,3 +1,7 @@
-# 1.0.0
+# 0.1.0
 
-- Project created
+- Added `defaultValue` option.
+
+# 0.0.1
+
+- Project created.

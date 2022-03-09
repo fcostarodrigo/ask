@@ -48,12 +48,13 @@ function makeBuild(config) {
 	return function (command) {
 		command = command.env();
 
-		for (const [name, {options, type, yargsOverrides}] of Object.entries(config)) {
+		for (const [name, {options, type, yargsOverrides, defaultValue}] of Object.entries(config)) {
 			command = command.option(paramCase(name), {
 				describe: sentenceCase(name),
 				type: typeMap.get(type),
 				required: false,
 				choices: options,
+				default: defaultValue,
 				...yargsOverrides,
 			});
 		}
