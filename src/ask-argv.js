@@ -13,8 +13,8 @@ const typeMap = new Map([
 	['password', 'string'],
 ]);
 
-export async function askArgv({positional = [], dotEnvPath = undefined, ...config}) {
-	configDotEnv(dotEnvPath);
+export async function askArgv({positional = [], dotEnvConfig = undefined, ...config}) {
+	configDotEnv(dotEnvConfig);
 
 	const positionalText = positional.map((option) => `[${option.name}]`).join(' ');
 

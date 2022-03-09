@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Added `dotEnvConfig` option.
+
 # 0.1.0
 
 - Added `defaultValue` option.

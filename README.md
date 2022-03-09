@@ -83,13 +83,15 @@ import { ask } from "@fcostarodrigo/ask";
 const letter = await ask({ type: "string", options: ["a", "b", "c"] });
 ```
 
-### Overrides
+### Additional settings
 
-You can pass `yargsOverrides` or `enquirerOverrides` to override any configuration.
+- `yargsOverrides` Override yargs configuration.
 
-### Default value.
+- `enquirerOverrides` Override enquirer configuration.
 
-Set the default value passing the `defaultValue` option.
+- `defaultValue` Default value.
+
+- `dotEnvConfig` Dot env configuration.
 
 ### Type mapping
 
