@@ -29,14 +29,14 @@ export async function askArgv({positional = [], dotEnvConfig = undefined, ...con
 
 	for (const option of positional) {
 		result[option.name] = parsed[option.name];
-		if (!parsed[option.name]) {
+		if (!parsed[option.name] && option.required) {
 			result[option.name] = await ask(option);
 		}
 	}
 
 	for (const [name, option] of Object.entries(config)) {
 		result[name] = parsed[name];
-		if (!parsed[name]) {
+		if (!parsed[name] && option.required) {
 			result[name] = await ask({name, ...option});
 		}
 	}

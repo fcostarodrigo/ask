@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Prompt only for explicit required field.
+
 # 0.2.0
 
 - Added `dotEnvConfig` option.
