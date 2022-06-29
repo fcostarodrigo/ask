@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Change autocomplete algorithm
+
 # 1.0.1
 
 - Fix bug if missing required boolean values.

@@ -1,17 +1,11 @@
 import {sentenceCase} from 'change-case';
 import enquirer from 'enquirer';
-import compareStrings from 'compare-strings';
+import fuzzy from 'fuzzy';
 
 function suggest(input, choices) {
-	const scores = new Map();
-
-	for (const choice of choices) {
-		scores.set(choice, compareStrings(input, choice.name));
-	}
-
-	return choices
-		.filter((choice) => scores.get(choice) > 0.5)
-		.sort((a, b) => scores.get(b) - scores.get(a));
+	return fuzzy
+		.filter(input.replaceAll(' ', ''), choices, {extract: (choice) => choice.name})
+		.map((result) => result.original);
 }
 
 const typeMap = {
