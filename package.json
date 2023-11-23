@@ -7,8 +7,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "types": "src/index.d.ts",
   "scripts": {
-    "test": "c8 ava",
+    "test": "vitest run",
     "lint": "xo src",
     "format": "prettier --write .",
     "prepare": "husky install"
@@ -29,39 +30,43 @@
   },
   "homepage": "https://github.com/fcostarodrigo/ask#readme",
   "devDependencies": {
-    "@types/node": "^17.0.18",
-    "@types/yargs": "^17.0.8",
-    "ava": "^4.0.1",
-    "c8": "^7.11.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.4",
-    "prettier": "^2.5.1",
-    "webpack": "^5.69.0",
-    "xo": "^0.48.0"
+    "@types/node": "^20.9.4",
+    "@types/yargs": "^17.0.32",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
+    "vitest": "^0.34.6",
+    "webpack": "^5.89.0",
+    "xo": "^0.56.0"
   },
   "dependencies": {
-    "change-case": "^4.1.2",
-    "dotenv": "^16.0.0",
-    "enquirer": "^2.3.6",
+    "change-case": "^5.2.0",
+    "dotenv": "^16.3.1",
+    "enquirer": "^2.4.1",
     "fuzzy": "^0.1.3",
-    "yargs": "^17.3.1"
+    "yargs": "^17.7.2"
   },
   "xo": {
-    "prettier": true,
     "rules": {
-      "node/file-extension-in-import": "off",
       "unicorn/better-regex": "off",
       "no-await-in-loop": "off",
       "no-useless-escape": "off",
-      "unicorn/no-await-expression-member": "off"
-    }
+      "unicorn/no-await-expression-member": "off",
+      "capitalized-comments": "off"
+    },
+    "extends": [
+      "prettier"
+    ]
   },
   "lint-staged": {
     "*": [
       "prettier --no-error-on-unmatched-pattern --ignore-unknown --write"
     ],
     "*.{js,jsx,mjs}": [
-      "xo src --fix"
+      "xo src --fix",
+      "vitest --run related"
     ]
   },
   "prettier": {

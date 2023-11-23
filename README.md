@@ -98,8 +98,8 @@ const letter = await ask({ type: "string", options: ["a", "b", "c"] });
 
 | Type     | options | yargs                                         | enquirer                                                                    |
 | -------- | ------- | --------------------------------------------- | --------------------------------------------------------------------------- |
-| list     | no      | [array](https://yargs.js.org/docs/#array)     | [list](https://www.npmjs.com/package/enquirer#list-prompt)                  |
-| list     | yes     | [array](https://yargs.js.org/docs/#array)     | [auto complete](https://www.npmjs.com/package/enquirer#autocomplete-prompt) |
+| array    | no      | [array](https://yargs.js.org/docs/#array)     | [list](https://www.npmjs.com/package/enquirer#list-prompt)                  |
+| array    | yes     | [array](https://yargs.js.org/docs/#array)     | [auto complete](https://www.npmjs.com/package/enquirer#autocomplete-prompt) |
 | boolean  |         | [boolean](https://yargs.js.org/docs/#boolean) | [confirm](https://www.npmjs.com/package/enquirer#confirm-prompt)            |
 | number   |         | [number](https://yargs.js.org/docs/#number)   | [numeral](https://www.npmjs.com/package/enquirer#numeral-prompt)            |
 | string   | no      | [string](https://yargs.js.org/docs/#string)   | [input](https://www.npmjs.com/package/enquirer#input-prompt)                |

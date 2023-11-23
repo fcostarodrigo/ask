@@ -1,3 +1,10 @@
+# 2.0.0
+
+- Limit the number of auto complete choices.
+- Show the default option in auto complete.
+- Type list is now array.
+- Add types.
+
 # 1.0.2
 
 - Change autocomplete algorithm

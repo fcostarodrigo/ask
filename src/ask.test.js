@@ -1,5 +1,5 @@
-import test from 'ava';
+import { test, expect } from "vitest";
 
-test('Sanity test', (t) => {
-	t.not('earth', 'flat');
+test("Sanity test", () => {
+  expect("Earth").not.toBe("flat");
 });
