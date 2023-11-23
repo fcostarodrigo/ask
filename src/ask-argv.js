@@ -1,5 +1,5 @@
 import process from "node:process";
-import { paramCase, sentenceCase } from "change-case";
+import { kebabCase, sentenceCase } from "change-case";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { config as configDotEnv } from "dotenv";
@@ -49,7 +49,7 @@ function makeBuild(config) {
     command = command.env();
 
     for (const [name, { options, type, yargsOverrides, defaultValue }] of Object.entries(config)) {
-      command = command.option(paramCase(name), {
+      command = command.option(kebabCase(name), {
         describe: sentenceCase(name),
         type: yargsTypeMap.get(type),
         required: false,

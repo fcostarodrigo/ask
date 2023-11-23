@@ -1,3 +1,7 @@
+# 2.0.1
+
+- Fix missing paramCase function.
+
 # 2.0.0
 
 - Limit the number of auto complete choices.
