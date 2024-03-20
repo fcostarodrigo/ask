@@ -20,7 +20,7 @@ Reads `.env` files.
 ```js
 import { askArgv } from "@fcostarodrigo/ask";
 
-const password = await askArgv({
+const { password } = await askArgv({
   password: {
     type: "password",
     required: true,
