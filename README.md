@@ -4,7 +4,7 @@ Wrapper of yargs and enquirer to ask user for input.
 
 ## Install
 
-```
+```bash
 npm i @fcostarodrigo/ask
 ```
 
