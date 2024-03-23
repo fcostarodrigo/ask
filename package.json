@@ -1,6 +1,6 @@
 {
   "name": "@fcostarodrigo/ask",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Wrapper of yargs and enquirer to ask user for input.",
   "main": "src/index.js",
   "type": "module",
