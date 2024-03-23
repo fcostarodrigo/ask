@@ -1,3 +1,8 @@
+# 3.0.0
+
+- Improved and fixed types.
+- Positional arguments are in the object now with a position value.
+
 # 2.0.1
 
 - Fix missing paramCase function.
