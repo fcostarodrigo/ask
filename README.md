@@ -1,6 +1,6 @@
 # Ask
 
-Wrapper of yargs and enquirer to ask user for input.
+Wrapper of yargs and enquirer libs to ask user for input.
 
 ## Install
 
@@ -12,10 +12,9 @@ npm i @fcostarodrigo/ask
 
 ### Command line arguments
 
-Prompt user when the argument is missing.
-Arguments are required by default.
-Accepts environment variables.
-Reads `.env` files.
+Create command line arguments. Each command line argument can be passed through the command line, environment variables and `.env` file. If the argument is missing and required, the user is prompted for it. Arguments are required by default. The options `--help` and `--version` are created automatically.
+
+Pass an object describing each command line argument, the returned promise is an object of the same shape with the values extracted.
 
 ```js
 import { askArgv } from "@fcostarodrigo/ask";
@@ -23,20 +22,25 @@ import { askArgv } from "@fcostarodrigo/ask";
 const { password } = await askArgv({
   password: {
     type: "password",
-    required: true,
   },
 });
 ```
+
+Passing value using the command line.
 
 ```bash
 node src/test.js --password xxx
 # no prompt
 ```
 
+Passing value using environment variable.
+
 ```bash
 PASSWORD=xxx node src/test.js
 # no prompt
 ```
+
+Passing value using the `.env` file.
 
 ```bash
 echo PASSWORD=xxx > .env
@@ -44,31 +48,54 @@ node src/test.js
 # no prompt
 ```
 
+Prompt the user for the missing value.
+
 ```bash
 node src/test.js
 # prompt for password
 ```
 
-Accepts positional arguments
+For each command line argument you can also specify:
+
+- `yargsOverrides` Override yargs lib configuration.
+- `enquirerOverrides` Override enquirer lib configuration.
+- `defaultValue` Default value.
+- `options` Possible options for strings and array types.
+- `required` If the value is required or not.
+
+### Positional arguments
 
 ```js
 import { askArgv } from "@fcostarodrigo/ask";
 
 const { username, password } = await askArgv({
-  positional: [
-    { name: "username", type: "string" },
-    { name: "password", type: "password" },
-  ],
+  username: { type: "string", position: 0 },
+  password: { type: "password", position: 1 },
 });
 ```
 
 ```bash
-node src/test.js user xxx
+node src/test.js john xxx
+```
+
+### `.env` location.
+
+You can also pass the location of the `.env` file as the second parameter.
+
+```js
+import { askArgv } from "@fcostarodrigo/ask";
+
+const { username } = await askArgv({ username: { type: "string" } }, { dotEnvConfig: ".dev.env" });
+```
+
+```bash
+echo USERNAME=john > .dev.env
+node src/test.js
 ```
 
 ### User input
 
-You can use in the middle of your program to get additional information.
+You can prompt the user in the middle of your program without defining new command line arguments.
 
 ```js
 import { ask } from "@fcostarodrigo/ask";
@@ -76,25 +103,7 @@ import { ask } from "@fcostarodrigo/ask";
 const password = await ask({ name: "password", type: "password" });
 ```
 
-You can specify a list of options.
-
-```js
-import { ask } from "@fcostarodrigo/ask";
-
-const letter = await ask({ type: "string", options: ["a", "b", "c"] });
-```
-
-### Additional settings
-
-- `yargsOverrides` Override yargs configuration.
-
-- `enquirerOverrides` Override enquirer configuration.
-
-- `defaultValue` Default value.
-
-- `dotEnvConfig` Dot env configuration.
-
-### Type mapping
+### Supported types
 
 | Type     | options | yargs                                         | enquirer                                                                    |
 | -------- | ------- | --------------------------------------------- | --------------------------------------------------------------------------- |

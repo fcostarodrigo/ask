@@ -13,42 +13,44 @@ const yargsTypeMap = new Map([
   ["password", "string"],
 ]);
 
-export async function askArgv({ positional = [], dotEnvConfig = undefined, ...config }) {
+export async function askArgv(cliArguments, { dotEnvConfig = undefined } = {}) {
   configDotEnv(dotEnvConfig);
 
-  const positionalText = positional.map((option) => `[${option.name}]`).join(" ");
+  const cliArgumentsWithName = Object.entries(cliArguments).map(([name, options]) => ({
+    name,
+    required: true,
+    ...options,
+  }));
 
+  const positional = cliArgumentsWithName
+    .filter((option) => "position" in option)
+    .sort((a, b) => a.position - b.position);
+  const positionalText = positional.map((option) => `[${option.name}]`).join(" ");
   const commandShape = positional.length > 0 ? `* ${positionalText}` : "*";
 
+  const nonPositional = cliArgumentsWithName.filter((option) => !("position" in option));
   const parsed = yargs(hideBin(process.argv))
-    .command(commandShape, false, makeBuild(config))
+    .command(commandShape, false, makeBuild(nonPositional))
     .showHelpOnFail(false)
     .parse();
 
   const result = {};
 
-  for (const option of positional) {
-    result[option.name] = parsed[option.name];
-    if (parsed[option.name] === undefined && option.required) {
-      result[option.name] = await ask(option);
-    }
-  }
-
-  for (const [name, option] of Object.entries(config)) {
-    result[name] = parsed[name];
-    if (parsed[name] === undefined && option.required) {
-      result[name] = await ask({ name, ...option });
+  for (const cliArgument of cliArgumentsWithName) {
+    result[cliArgument.name] = parsed[cliArgument.name];
+    if (parsed[cliArgument.name] === undefined && cliArgument.required) {
+      result[cliArgument.name] = await ask(cliArgument);
     }
   }
 
   return result;
 }
 
-function makeBuild(config) {
+function makeBuild(nonPositional) {
   return function (command) {
     command = command.env();
 
-    for (const [name, { options, type, yargsOverrides, defaultValue }] of Object.entries(config)) {
+    for (const { name, options, type, yargsOverrides, defaultValue } of nonPositional) {
       command = command.option(kebabCase(name), {
         describe: sentenceCase(name),
         type: yargsTypeMap.get(type),
