@@ -103,6 +103,21 @@ import { ask } from "@fcostarodrigo/ask";
 const password = await ask({ name: "password", type: "password" });
 ```
 
+### Environment variables only
+
+You can use `askEnv` to get values from environment variables alone. An error will be thrown if the environment variable is required, missing and there is no default value for it. You can pass `dotEnvConfig` as a field of the object of the second argument. The value will be parsed according to the type. Arrays are split by a single `,` and booleans are true if they match the string `true` when converted to lower case.
+
+```js
+const { username, password } = askEnv({
+  username: { type: "string" },
+  password: { type: "password" },
+});
+```
+
+- `required` If the value is required or not.
+- `defaultValue` Default value.
+- `options` Array of allowed values.
+
 ### Supported types
 
 | Type     | options | yargs                                         | enquirer                                                                    |

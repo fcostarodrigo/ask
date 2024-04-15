@@ -19,6 +19,14 @@ type OptionsTypeMap = {
   array: { options?: string[] };
 };
 
+type OptionsEnvTypeMap = {
+  boolean: { options?: boolean[] };
+  number: { options?: number[] };
+  password: { options?: string[] };
+  string: { options?: string[] };
+  array: { options?: string[] };
+};
+
 type AskOptions<T extends Type> = {
   name: string;
   enquirerOverrides?: PromptOptions;
@@ -40,3 +48,13 @@ export function askArgv<Types extends Record<string, Type>>(
   options: { [Key in keyof Types]: ArgvOptions<Types[Key]> },
   otherOptions?: { dotEnvConfig?: string },
 ): Promise<{ [Key in keyof Types]: TypeMap[Types[Key]] }>;
+
+export function askEnv<Types extends Record<string, Type>>(
+  options: {
+    [Key in keyof Types]: {
+      type: Types[Key];
+      defaultValue?: TypeMap[Types[Key]];
+    } & OptionsEnvTypeMap[Types[Key]];
+  },
+  otherOptions?: { dotEnvConfig?: string },
+): { [Key in keyof Types]: TypeMap[Types[Key]] };

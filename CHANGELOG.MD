@@ -1,3 +1,7 @@
+# 3.1.0
+
+- Added `askEnv`.
+
 # 3.0.0
 
 - Improved and fixed types.
