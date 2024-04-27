@@ -39,7 +39,7 @@ export async function askArgv(cliArguments, { dotEnvConfig = undefined } = {}) {
   for (const cliArgument of cliArgumentsWithName) {
     result[cliArgument.name] = parsed[cliArgument.name];
     if (parsed[cliArgument.name] === undefined && cliArgument.required) {
-      result[cliArgument.name] = await ask(cliArgument);
+      result[cliArgument.name] = await ask(cliArgument); // eslint-disable-line no-await-in-loop
     }
   }
 

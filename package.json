@@ -9,9 +9,7 @@
   },
   "types": "src/index.d.ts",
   "scripts": {
-    "test": "vitest run",
-    "lint": "xo src",
-    "format": "prettier --write .",
+    "test": "knip && xo --fix src",
     "prepare": "husky"
   },
   "repository": {
@@ -30,46 +28,31 @@
   },
   "homepage": "https://github.com/fcostarodrigo/ask#readme",
   "devDependencies": {
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.7",
     "@types/yargs": "^17.0.32",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
-    "vitest": "^1.4.0",
+    "knip": "^5.11.0",
     "xo": "^0.58.0"
   },
   "dependencies": {
-    "change-case": "^5.4.3",
+    "change-case": "^5.4.4",
     "dotenv": "^16.4.5",
     "enquirer": "^2.4.1",
     "fuzzy": "^0.1.3",
     "yargs": "^17.7.2"
   },
   "xo": {
-    "rules": {
-      "unicorn/better-regex": "off",
-      "no-await-in-loop": "off",
-      "no-useless-escape": "off",
-      "unicorn/no-await-expression-member": "off",
-      "capitalized-comments": "off"
-    },
-    "extends": [
-      "prettier"
-    ]
-  },
-  "lint-staged": {
-    "*": [
-      "prettier --no-error-on-unmatched-pattern --ignore-unknown --write"
-    ],
-    "*.{js,jsx,mjs}": [
-      "xo src --fix",
-      "vitest --run related"
-    ]
+    "prettier": true
   },
   "prettier": {
+    "singleQuote": false,
+    "bracketSpacing": true,
     "trailingComma": "all",
     "printWidth": 100
+  },
+  "knip": {
+    "ignore": [
+      "src/index.d.ts"
+    ]
   }
 }
