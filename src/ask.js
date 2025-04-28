@@ -1,27 +1,9 @@
-import process from "node:process";
 import { sentenceCase } from "change-case";
 import enquirer from "enquirer";
 import fuzzy from "fuzzy";
+import process from "node:process";
 
-function suggest(input, choices) {
-  return fuzzy
-    .filter(input.replaceAll(" ", ""), choices, { extract: (choice) => choice.name })
-    .map((result) => result.original);
-}
-
-function confirm() {
-  return { type: "confirm" };
-}
-
-function numeral() {
-  return { type: "numeral" };
-}
-
-function invisible() {
-  return { type: "invisible" };
-}
-
-function autocomplete({ options, defaultValue, type }) {
+function autocomplete({ defaultValue, options, type }) {
   if (!options && type === "array") {
     return { type: "list" };
   }
@@ -33,44 +15,62 @@ function autocomplete({ options, defaultValue, type }) {
   const multiple = type === "array" ? true : undefined;
 
   if (defaultValue && !options.includes(defaultValue)) {
-    defaultValue = null;
+    defaultValue = undefined;
   }
 
   if (!defaultValue) {
     return {
-      type: "autocomplete",
       multiple,
       suggest,
+      type: "autocomplete",
     };
   }
 
-  const choices = [defaultValue].concat(options.filter((option) => option !== defaultValue));
+  const choices = [defaultValue, ...options.filter((option) => option !== defaultValue)];
 
   return {
-    type: "autocomplete",
+    choices,
+    initial: 0,
     multiple,
     suggest,
-    initial: 0,
-    choices,
+    type: "autocomplete",
   };
 }
 
+function confirm() {
+  return { type: "confirm" };
+}
+
+function invisible() {
+  return { type: "invisible" };
+}
+
+function numeral() {
+  return { type: "numeral" };
+}
+
+function suggest(input, choices) {
+  return fuzzy
+    .filter(input.replaceAll(" ", ""), choices, { extract: (choice) => choice.name })
+    .map((result) => result.original);
+}
+
 const enquirerTypeMap = {
+  array: autocomplete,
   boolean: confirm,
   number: numeral,
   password: invisible,
-  array: autocomplete,
   string: autocomplete,
 };
 
 export async function ask(option) {
   try {
     const prompt = await enquirer.prompt({
-      name: option.name,
-      message: sentenceCase(option.name),
       choices: option.options,
       initial: option.defaultValue,
       limit: 10,
+      message: sentenceCase(option.name),
+      name: option.name,
       ...enquirerTypeMap[option.type](option),
       ...option.enquirerOverrides,
     });

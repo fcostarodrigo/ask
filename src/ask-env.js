@@ -1,13 +1,13 @@
-import process from "node:process";
 import { constantCase } from "change-case";
-import { config as configDotEnv } from "dotenv";
+import { config as configDotEnvironment } from "dotenv";
+import process from "node:process";
 
 const parsers = {
   array: (value) => value.split(","),
   boolean: (value) => value.toLowerCase() === "true",
   number: Number,
-  string: (value) => value,
   password: (value) => value,
+  string: (value) => value,
 };
 
 const disjunction = new Intl.ListFormat("en-US", {
@@ -15,8 +15,8 @@ const disjunction = new Intl.ListFormat("en-US", {
   type: "disjunction",
 });
 
-export function askEnv(options, { dotEnvConfig = undefined } = {}) {
-  configDotEnv(dotEnvConfig);
+export function askEnv(options, { dotEnvConfig: dotEnvironmentConfig } = {}) {
+  configDotEnvironment(dotEnvironmentConfig);
 
   const result = {};
 

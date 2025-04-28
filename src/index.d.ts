@@ -1,5 +1,5 @@
 import type PromptOptions from "enquirer";
-import type yargs from "yargs";
+import { type Options } from "yargs";
 
 type Type = "boolean" | "number" | "password" | "string" | "array";
 
@@ -12,9 +12,9 @@ type TypeMap = {
 };
 
 type OptionsTypeMap = {
-  boolean: {}; // eslint-disable-line @typescript-eslint/ban-types
-  number: {}; // eslint-disable-line @typescript-eslint/ban-types
-  password: {}; // eslint-disable-line @typescript-eslint/ban-types
+  boolean: {};
+  number: {};
+  password: {};
   string: { options?: string[] };
   array: { options?: string[] };
 };
@@ -36,7 +36,7 @@ type AskOptions<T extends Type> = {
 
 type ArgvOptions<T extends Type> = {
   enquirerOverrides?: PromptOptions;
-  yargsOverrides?: yargs.Options;
+  yargsOverrides?: Options;
   type: T;
   position?: number;
   defaultValue?: TypeMap[T];

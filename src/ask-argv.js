@@ -1,19 +1,20 @@
-import process from "node:process";
 import { kebabCase, sentenceCase } from "change-case";
+import { config as configDotEnv } from "dotenv";
+import process from "node:process";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { config as configDotEnv } from "dotenv";
+
 import { ask } from "./ask.js";
 
 const yargsTypeMap = new Map([
   ["array", "array"],
   ["boolean", "boolean"],
   ["number", "number"],
-  ["string", "string"],
   ["password", "string"],
+  ["string", "string"],
 ]);
 
-export async function askArgv(cliArguments, { dotEnvConfig = undefined } = {}) {
+export async function askArgv(cliArguments, { dotEnvConfig } = {}) {
   configDotEnv(dotEnvConfig);
 
   const cliArgumentsWithName = Object.entries(cliArguments).map(([name, options]) => ({
@@ -39,7 +40,7 @@ export async function askArgv(cliArguments, { dotEnvConfig = undefined } = {}) {
   for (const cliArgument of cliArgumentsWithName) {
     result[cliArgument.name] = parsed[cliArgument.name];
     if (parsed[cliArgument.name] === undefined && cliArgument.required) {
-      result[cliArgument.name] = await ask(cliArgument); // eslint-disable-line no-await-in-loop
+      result[cliArgument.name] = await ask(cliArgument);
     }
   }
 
@@ -50,13 +51,13 @@ function makeBuild(nonPositional) {
   return function (command) {
     command = command.env();
 
-    for (const { name, options, type, yargsOverrides, defaultValue } of nonPositional) {
+    for (const { defaultValue, name, options, type, yargsOverrides } of nonPositional) {
       command = command.option(kebabCase(name), {
-        describe: sentenceCase(name),
-        type: yargsTypeMap.get(type),
-        required: false,
         choices: options,
         default: defaultValue,
+        describe: sentenceCase(name),
+        required: false,
+        type: yargsTypeMap.get(type),
         ...yargsOverrides,
       });
     }
