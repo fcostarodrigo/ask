@@ -9,7 +9,7 @@
   },
   "types": "src/index.d.ts",
   "scripts": {
-    "test": "knip && prettier --ignore-unknown --check . && eslint --report-unused-disable-directives --max-warnings 0 . ",
+    "test": "knip && prettier --ignore-unknown --check . && eslint --report-unused-disable-directives --max-warnings 0 .",
     "fix": "prettier --ignore-unknown --write . && eslint --fix .",
     "prepare": "husky"
   },
@@ -32,12 +32,14 @@
     "@eslint/js": "^9.27.0",
     "@types/node": "^22.15.18",
     "@types/yargs": "^17.0.33",
+    "commitlint": "^19.8.1",
     "eslint": "^9.27.0",
     "eslint-plugin-perfectionist": "^4.13.0",
     "eslint-plugin-unicorn": "^59.0.1",
     "husky": "^9.1.7",
     "knip": "^5.56.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "semantic-release": "^24.2.4"
   },
   "dependencies": {
     "change-case": "^5.4.4",

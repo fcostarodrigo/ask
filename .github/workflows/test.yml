@@ -19,4 +19,5 @@ jobs:
           node-version: 24
           cache: "pnpm"
       - run: pnpm install
+      - run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
       - run: pnpm run test
