@@ -1,3 +1,8 @@
+# 3.2.0
+
+- Configure CI/CD with GitHub Actions.
+- Update dependencies.
+
 # 3.1.1
 
 - Update dependencies.
